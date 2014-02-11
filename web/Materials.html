@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" type="text/css" href="Styles.css">
+        <SCRIPT language="javascript">
+            var tableID;
+            function addRow(tableID) 
+            {
+                var table = document.getElementById(tableID);
+                
+                var rowCount = table.rows.length;
+                var row = table.insertRow(rowCount);
+                
+                var cell1 = row.insertCell(0);
+                var element1 = document.createElement("input");
+                element1.type = "checkbox";
+                element1.id="matChk";
+                element1.name="matChk";
+                cell1.appendChild(element1);
+                
+                var cell2 = row.insertCell(1);
+                var element2 = document.createElement("input");
+                element2.type = "text";
+                element2.id = "matNo";
+                element2.name = "matNo";
+                cell2.appendChild(element2);
+
+                var cell3 = row.insertCell(2);
+                var element3 = document.createElement("input");
+                element3.type = "text";
+                element3.id = "mat";
+                element3.name = "mat";
+                cell3.appendChild(element3); 
+            }
+            function deleteRow(tableID) {
+            try {
+            var table = document.getElementById(tableID);
+            var rowCount = table.rows.length;
+ 
+            for(var i=0; i<rowCount; i++) {
+                var row = table.rows[i];
+                var chkbox = row.cells[0].childNodes[0];
+                if(null != chkbox && true == chkbox.checked) {
+                    table.deleteRow(i);
+                    rowCount--;
+                    i--;
+                }
+             }
+            }catch(e) {
+                alert(e);
+            }
+        }
+            function deleteMaterial(){
+                var delMat=prompt("Enter Material");
+                document.form.dmat.value=delMat;
+            }
+            
+            function updateMaterial(){
+                 var upMatNo=prompt("Enter number");
+                 document.form.umatNo.value=upMatNo;
+                 
+                 var upMatName=prompt("Enter material");
+                 document.form.umatName.value=upMatName;
+            }
+        
+        
+        </script>
+    </head>
+    <body>
+    <center>
+        <h1 id="menuh1">Materials</h1>
+        <form method="post" action="Materials" name="form">
+            <table border="1" id="matTable">
+                <tr id="menuhd">
+                    <th>Tick</th>
+                    <th>Material No.
+                    <th>Material
+                </tr>
+                 <tr>
+                    <td><input type="checkbox" name="matChk">
+                    <td><input type="text" name="matNo">
+                    <td><input type="text" name="mat">
+                </tr>     
+            </table><br>
+            <input type="Button" value="Add Row" name="s1" onclick="addRow('matTable');"/>
+            <input type="Button" value="Delete Row" name="s1" onclick="deleteRow('matTable');">
+            <input type="Submit" value="Display" name="s1">
+            <input type="Submit" value="Delete" name="s1" onclick="deleteMaterial();"/>
+            <input type="Submit" value="Update" name="s1" onclick="updateMaterial();">
+            <input type="Submit" value="Save" name="s1"/>
+            <input type="reset" value="Clear" name="s1"/>
+            <!--Hidden form fields-->
+            <input type="hidden" value="" name="dmat"/>
+            <input type="hidden" value="" name="umatNo"/>
+            <input type="hidden" value="" name="umatName"/>
+        </form>
+    </center>
+    </body>
+</html>

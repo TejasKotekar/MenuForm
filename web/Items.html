@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" type="text/css" href="Styles.css">
+        <SCRIPT language="javascript">
+            var tableID;
+            function addRow(tableID) 
+            {
+                var table = document.getElementById(tableID);
+                
+                var rowCount = table.rows.length;
+                var row = table.insertRow(rowCount);
+                
+                var cell1 = row.insertCell(0);
+                var element1 = document.createElement("input");
+                element1.type = "checkbox";
+                element1.id="iteChk";
+                element1.name="iteChk";
+                cell1.appendChild(element1);
+                
+                var cell2 = row.insertCell(1);
+                var element2 = document.createElement("input");
+                element2.type = "text";
+                element2.id = "iteNo";
+                element2.name = "iteNo";
+                cell2.appendChild(element2);
+
+                var cell3 = row.insertCell(2);
+                var element3 = document.createElement("input");
+                element3.type = "text";
+                element3.id = "ite";
+                element3.name = "ite";
+                cell3.appendChild(element3); 
+            }
+            function deleteRow(tableID) {
+            try {
+            var table = document.getElementById(tableID);
+            var rowCount = table.rows.length;
+ 
+            for(var i=0; i<rowCount; i++) {
+                var row = table.rows[i];
+                var chkbox = row.cells[0].childNodes[0];
+                if(null != chkbox && true == chkbox.checked) {
+                    table.deleteRow(i);
+                    rowCount--;
+                    i--;
+                }
+             }
+            }catch(e) {
+                alert(e);
+            }
+        }
+            function deleteItem(){
+                var delItem=prompt("Enter Item");
+                document.form.dite.value=delItem;
+            }
+            
+            function updateItem(){
+                 var upItemNo=prompt("Enter number");
+                 document.form.uiteNo.value=upItemNo;
+                 
+                 var upItemName=prompt("Enter item");
+                 document.form.uiteName.value=upItemName;
+            }        
+        
+        
+        </script>
+        
+    </head>
+    <body>
+    <center>
+        <h1 id="menuh1">Items</h1>
+        <form method="post" action="Items" name="form"> 
+            <table border="1" id="iteTable">
+                <tr id="menuhd">
+                    <th>Tick</th>
+                    <th>Item No
+                    <th>Item                
+                </tr>
+                 <tr>
+                    <td><input type="checkbox" name="iteChk">
+                    <td><input type="text" name="iteNo">
+                    <td><input type="text" name="ite">
+                </tr>     
+            </table><br>
+            <input type="Button" value="Add Row" name="s1" onclick="addRow('iteTable');"/>
+            <input type="Button" value="Delete Row" name="s1" onclick="deleteRow('iteTable');">
+            <input type="submit" value="Display" name="s1">
+            <input type="Submit" value="Delete" name="s1" onclick="deleteItem();"/>
+            <input type="Submit" value="Update" name="s1" onclick="updateItem();">
+            <input type="Submit" value="Save" name="s1"/>
+            <input type="reset" value="Clear"/>
+            <!--Hidden form fields-->
+            <input type="hidden" value="" name="dite"/>
+            <input type="hidden" value="" name="uiteNo"/>
+            <input type="hidden" value="" name="uiteName"/>            
+            
+        </form>
+    </center>
+    </body>
+</html>
